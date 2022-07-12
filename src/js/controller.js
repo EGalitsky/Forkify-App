@@ -15,8 +15,6 @@ import { async } from 'regenerator-runtime';
 const controlRecipes = async function () {
   // 1)
   try {
-    resultsView.renderSpinner();
-
     const id = window.location.hash.slice(1);
 
     if (!id) return;
@@ -34,12 +32,15 @@ const controlRecipes = async function () {
 
 const controlSeacrhResults = async function () {
   try {
+    // resultsView.renderSpinner();
+
     const query = searchView.getQuery();
     if (!query) return;
 
     await model.loadSearchResults(query);
-    console.log(model.state.search.results);
-    resultsView.render(model.state.search.results);
+
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
   } catch (err) {
     console.log(err);
   }
